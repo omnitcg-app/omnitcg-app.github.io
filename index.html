@@ -171,7 +171,7 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
    .t a horizontal face (front edge x,y; width w; depth d), .s a right-hand face
    (front edge x, from y down h; depth d), .f a plain front face. */
 .jig { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 48px; align-items: center; }
-.stand-wrap { width: 336px; height: 314px; max-width: 100%; }
+.stand-wrap { width: 336px; height: auto; max-width: 100%; }
 .stand { position: relative; width: 280px; height: 262px; transform: scale(1.2); transform-origin: top left; }
 .stand div { position: absolute; }
 .stand .t {
@@ -533,27 +533,10 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 
   <section id="supporto">
     <div class="jig">
-      <div class="stand-wrap" aria-hidden="true">
-        <div class="stand">
-          <div class="f" style="--x:222;--y:76;--w:18;--h:70"></div>
-          <div class="s" style="--x:240;--y:76;--h:70;--d:12"></div>
-          <div class="t top" style="--x:36;--y:186;--w:184;--d:52"></div>
-          <div class="t well" style="--x:48;--y:180;--w:160;--d:40"></div>
-          <div class="t fc" style="--x:100;--y:174;--w:64;--d:30"><i style="background:#5B8DEF"></i></div>
-          <div class="t fc" style="--x:100;--y:171;--w:64;--d:30"><i style="background:#6EE7A8"></i></div>
-          <div class="t fc" style="--x:100;--y:168;--w:64;--d:30"><i style="background:#EF7A6B"></i></div>
-          <div class="t fc" style="--x:100;--y:165;--w:64;--d:30"><i style="background:#E9B949"></i></div>
-          <div class="f" style="--x:36;--y:186;--w:184;--h:52"></div>
-          <div class="s" style="--x:220;--y:186;--h:52;--d:52"></div>
-          <div class="cone"></div>
-          <div class="t top" style="--x:70;--y:72;--w:170;--d:44"></div>
-          <div class="f" style="--x:70;--y:72;--w:170;--h:9"></div>
-          <div class="s" style="--x:240;--y:72;--h:9;--d:44"></div>
-          <div class="f" style="--x:58;--y:74;--w:166;--h:4;background:#3a3d5c;border-radius:2px"></div>
-          <div class="t phone" style="--x:58;--y:74;--w:166;--d:42">
-            <div class="screen"><div class="island"></div><div class="shot"></div><div class="ok"></div></div>
-          </div>
-        </div>
+      <div class="stand-wrap">
+        <img src="supporto_scanner.png" width="336" height="569"
+            alt="Supporto stampato in 3D: telefono sul braccio, carte nella vaschetta sotto"
+            loading="lazy" style="width:100%;height:auto;display:block">
       </div>
       <div>
         <h2>Modalità supporto: scansioni a mani libere</h2>
