@@ -248,7 +248,7 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 .games { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 0; padding: 0; list-style: none; }
 .game {
   position: relative;
-  flex: 0 1 calc((100% - 5 * 12px) / 6);
+  flex: 0 1 calc((100% - 5 * 12px) / 4);
   aspect-ratio: 1.5;
   max-width: 100%;
   display: flex;
@@ -522,10 +522,10 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
       <li class="game"><img src="games/dragonballsuper.png" alt="Dragon Ball Super Fusion World" loading="lazy"></li>
       <li class="game"><img src="games/gundam.png" alt="Gundam" loading="lazy"></li>
       <li class="game"><img src="games/sorcery.png" alt="Sorcery: Contested Realm" loading="lazy"></li>
+      <li class="game"><img src="games/yugioh.png" alt="Yu-Gi-Oh!" loading="lazy"></li>
     </ul>
     <span class="soon-label" id="soon-label">In arrivo</span>
     <ul class="games soon" aria-labelledby="soon-label">
-      <li class="game"><img src="games/yugioh.png" alt="Yu-Gi-Oh!" loading="lazy"></li>
       <li class="game"><img src="games/dragonballsupermasters.png" alt="Dragon Ball Super Masters" loading="lazy"></li>
       <li class="game"><img src="games/riftbound.png" alt="Riftbound" loading="lazy"></li>
     </ul>
@@ -792,6 +792,14 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <span class="addr" id="telegram-handle"></span>
         <div class="actions">
           <a class="pill-btn" id="telegram-link" href="#segnalazioni" target="_blank" rel="noopener">Scrivimi su Telegram</a>
+        </div>
+      </article>
+      <article class="contact">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>Instagram</h3>
+        <p>Per seguire le novità o scrivermi un messaggio.</p>
+        <span class="addr">@omnitcg.app</span>
+        <div class="actions">
+          <a class="pill-btn" href="https://www.instagram.com/omnitcg.app/" target="_blank" rel="noopener">Apri su Instagram</a>
         </div>
       </article>
     </div>
