@@ -112,51 +112,15 @@ h1 em { font-style: normal; color: var(--gold); }
 .btn svg { width: 20px; height: 20px; }
 .meta { font-family: var(--mono); font-size: 12.5px; color: var(--faint); }
 
-/* Card fan */
-.fan { position: relative; height: 360px; display: grid; place-items: center; }
-.ring {
-  position: absolute;
-  width: 300px; height: 300px;
-  max-width: 100%;
-  border-radius: 50%;
-  border: 14px solid var(--gold);
-  background: var(--navy-glow);
+/* Hero image: two phones with the app, transparent background */
+.hero-phones {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin-inline: auto;
+  filter: drop-shadow(0 30px 50px rgba(0,0,0,0.5));
 }
-.card {
-  position: absolute;
-  width: 150px;
-  aspect-ratio: 63 / 88;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: 0 18px 40px -12px rgba(0,0,0,0.6);
-  transform-origin: 50% 110%;
-  transition: transform .5s cubic-bezier(.2,.8,.2,1);
-}
-.card .art { flex: 1; border-radius: 6px; background: rgba(255,255,255,0.25); }
-.card .bar { height: 7px; border-radius: 4px; background: rgba(255,255,255,0.45); }
-.card .bar.short { width: 55%; }
-.card .no { font-family: var(--mono); font-size: 10px; color: rgba(0,0,0,0.45); text-align: right; }
-.c1 { background: var(--blue); transform: rotate(-18deg) translateX(-30px); }
-.c2 { background: var(--coral); transform: rotate(18deg) translateX(30px); }
-.c3 { background: var(--gold); }
-.fan:hover .c1 { transform: rotate(-24deg) translateX(-46px); }
-.fan:hover .c2 { transform: rotate(24deg) translateX(46px); }
-.price {
-  position: absolute;
-  right: 4%;
-  bottom: 30px;
-  background: var(--surface);
-  border: 1px solid rgba(242,210,75,0.3);
-  border-radius: 14px;
-  padding: 10px 14px;
-  font-size: 13px;
-  box-shadow: 0 14px 30px -12px rgba(0,0,0,0.7);
-}
-.price b { display: block; font-size: 19px; color: var(--gold); font-variant-numeric: tabular-nums; }
-.price span { color: var(--faint); font-family: var(--mono); font-size: 11px; }
 
 /* Sections */
 section { padding-block: 56px; border-top: 1px solid var(--line); }
@@ -270,6 +234,31 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 }
 .games.soon .game { background: transparent; border-style: dashed; }
 .games.soon .game img { opacity: 0.4; filter: grayscale(1); }
+
+/* Features: one row per feature, the phone renders (transparent) alternating left and right */
+.feats { list-style: none; margin: 0 0 48px; padding: 0; display: grid; gap: 56px; }
+.feat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.feat:nth-child(even) .feat-img { order: 2; }
+.feat-img { display: block; width: 100%; max-width: 440px; height: auto; margin-inline: auto; filter: drop-shadow(0 26px 40px rgba(0,0,0,0.5)); }
+.feat-img.single { max-width: 250px; }
+.feat h3 { font-size: clamp(22px, 2.6vw, 28px); letter-spacing: -0.5px; line-height: 1.2; margin: 8px 0 10px; text-wrap: balance; }
+.feat p { margin: 0; color: var(--muted); max-width: 30em; }
+.feat .eyebrow + h2 { margin-top: 8px; }
+.callout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 40px 0 0;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(242,210,75,0.35);
+  background: rgba(242,210,75,0.08);
+  font-size: 14.5px;
+  color: var(--text);
+}
+.callout svg { width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--gold); }
+.callout b { color: var(--gold); }
+.pockets.solo { grid-template-columns: minmax(0, 1fr); }
 
 /* Limits: one row per cap, the number set like a counter */
 .limits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -464,12 +453,15 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 
 @media (max-width: 820px) {
   .hero { grid-template-columns: minmax(0, 1fr); padding-block: 16px 48px; gap: 20px; }
-  .fan { height: 300px; order: -1; }
-  .ring { width: 250px; height: 250px; border-width: 12px; }
-  .card { width: 122px; }
+  .hero-phones { order: -1; max-width: 340px; }
   .pockets, .steps { grid-template-columns: minmax(0, 1fr); }
   .game { flex-basis: calc((100% - 2 * 12px) / 3); padding: 10px; }
   .limits { grid-template-columns: minmax(0, 1fr); }
+  .feats { gap: 44px; margin-bottom: 36px; }
+  .feat { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .feat:nth-child(even) .feat-img { order: 0; }
+  .feat-img { max-width: 340px; }
+  .feat-img.single { max-width: 200px; }
   .shop { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .jig { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .stand-wrap { width: 308px; height: 288px; margin: 0 auto; }
@@ -482,7 +474,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 }
 @media (prefers-reduced-motion: reduce) {
   .stand .cone { animation: none; }
-  .card, .btn { transition: none; }
+  .btn { transition: none; }
 }
 </style>
 
@@ -505,13 +497,9 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
       </div>
     </div>
 
-    <div class="fan" aria-hidden="true">
-      <div class="ring"></div>
-      <div class="card c1"><div class="art"></div><div class="bar"></div><div class="bar short"></div><div class="no">112/198</div></div>
-      <div class="card c2"><div class="art"></div><div class="bar"></div><div class="bar short"></div><div class="no">OP05-119</div></div>
-      <div class="card c3"><div class="art"></div><div class="bar"></div><div class="bar short"></div><div class="no">004/102</div></div>
-      <div class="price"><span>CARDMARKET · NM</span><b>€ 12,40</b></div>
-    </div>
+    <img class="hero-phones" src="screens/hero-phones.webp" width="1076" height="1187"
+        alt="Due telefoni con OmniTCG: la Home con il valore della collezione e un'espansione con le carte possedute e i loro prezzi"
+        fetchpriority="high">
   </div>
 
   <section>
@@ -529,6 +517,93 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
       <li class="game"><img src="games/dragonballsupermasters.png" alt="Dragon Ball Super Masters" loading="lazy"></li>
       <li class="game"><img src="games/riftbound.png" alt="Riftbound" loading="lazy"></li>
     </ul>
+  </section>
+
+  <section>
+    <h2>Tutto quello che serve a un collezionista</h2>
+    <p class="sub">Dalla carta appena uscita dalla bustina al valore dell'intera collezione.</p>
+    <ul class="feats">
+      <li class="feat">
+        <img class="feat-img" src="screens/coppia_scansione.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: una carta inquadrata e rilevata, e le corrispondenze trovate con i prezzi per condizione" loading="lazy">
+        <div>
+          <span class="eyebrow">Scansione</span>
+          <h3>Inquadra la carta. Al resto pensa l'app.</h3>
+          <p>Punta la fotocamera: nome, espansione e numero della carta in un attimo, con il prezzo per ogni condizione. Se ci sono stampe simili, scegli quella giusta tra le corrispondenze.</p>
+        </div>
+      </li>
+      <li class="feat">
+        <img class="feat-img single" src="screens/scansione_continua_singolo.webp" width="619" height="1143" alt="Telefono con OmniTCG in modalità continua: una carta rilevata e in basso le carte già scansionate con i prezzi e il totale" loading="lazy">
+        <div>
+          <span class="eyebrow">Scansione continua</span>
+          <h3>Una carta dopo l'altra, senza fermarti.</h3>
+          <p>In modalità continua passi subito alla carta successiva: quelle già scansionate si mettono in fila in basso, ognuna col suo prezzo, insieme al totale.</p>
+        </div>
+      </li>
+      <li class="feat">
+        <img class="feat-img" src="screens/coppia_collezione.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: la Home con il valore della collezione e un'espansione con le carte possedute e i loro prezzi" loading="lazy">
+        <div>
+          <span class="eyebrow">Collezione</span>
+          <h3>Quanto vale la tua collezione?</h3>
+          <p>Il valore di tutto quello che hai su CardTrader e su Cardmarket, insieme a carte, copie, espansioni e mazzi. Sfoglia la collezione per gioco ed espansione.</p>
+        </div>
+      </li>
+      <li class="feat">
+        <img class="feat-img" src="screens/coppia_espansioni.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: due espansioni, una con tutte le carte e una con le carte possedute e i loro prezzi" loading="lazy">
+        <div>
+          <span class="eyebrow">Prezzi ed espansioni</span>
+          <h3>Ogni carta, col suo prezzo.</h3>
+          <p>Il prezzo di oggi su CardTrader e la media del listino europeo di Cardmarket, uno accanto all'altro. Possedute, tutte o mancanti: un tocco e vedi cosa ti manca per chiudere il set.</p>
+        <span class="tag">EUR · aggiornati ogni giorno</span>
+        </div>
+      </li>
+      <li class="feat">
+        <img class="feat-img" src="screens/coppia_mazzi.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: l'elenco dei mazzi e il dettaglio di un mazzo con le sue carte" loading="lazy">
+        <div>
+          <span class="eyebrow">Mazzi</span>
+          <h3>Costruisci il mazzo con le tue carte.</h3>
+          <p>Crea i tuoi mazzi, riempili scansionando o dal catalogo e scopri quante carte ti mancano, con gli avvisi sulle regole del formato.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="prevalutazione">
+    <div class="feat">
+      <img class="feat-img" src="screens/coppia_prevalutazione.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: le foto di fronte, retro e a luce radente di una carta, e la stima PSA con centratura, angoli, bordi, superficie e difetti" loading="lazy">
+      <div>
+        <span class="eyebrow">Pre-valutazione</span>
+        <h2>In che condizione è la tua carta?</h2>
+        <p class="sub" style="margin-bottom: 0">Prima di vendere o far gradare una carta, fatti un'idea del voto che potrebbe prendere. Bastano qualche foto e un tocco su "Valuta la carta": la stima la fa l'intelligenza artificiale, partendo dalle tue foto.</p>
+        <ul class="jig-points">
+          <li>
+            <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+            <div>
+              <h3>Fronte, retro e luce radente</h3>
+              <p>Il fronte è obbligatorio; il retro serve per la centratura e gli scatti a luce radente mostrano i graffi.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></span>
+            <div>
+              <h3>Una stima del voto</h3>
+              <p>L'IA si basa sulla centratura di fronte e retro e dà un punteggio ad angoli, bordi e superficie.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+            <div>
+              <h3>I difetti, uno per uno</h3>
+              <p>L'IA cerca i difetti visibili nelle foto e ti dice dove sono e quanto pesano: una sbiancatura sul retro, un bordo, un graffio sull'olografia.</p>
+            </div>
+          </li>
+        </ul>
+        <p class="note">Una pre-valutazione al giorno, vedi i <a href="#limiti">limiti dell'account</a>.</p>
+      </div>
+    </div>
+    <p class="callout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+      <span><b>La stima è indicativa.</b> L'IA vede solo quello che si nota in foto e non sostituisce la gradazione. La qualità delle foto e la luce influiscono molto sul risultato, e il calcolo della centratura potrebbe non essere perfetto.</span>
+    </p>
   </section>
 
   <section id="supporto">
@@ -562,44 +637,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         </div>
         <p class="note">La modalità supporto si attiva sul tuo account su richiesta.</p>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Tutto quello che serve a un collezionista</h2>
-    <p class="sub">Dalla carta appena uscita dalla bustina al valore dell'intera collezione.</p>
-    <div class="pockets">
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><rect x="8" y="7" width="8" height="10" rx="1.5"/></svg></div>
-        <h3>Scansione</h3>
-        <p>Punta la fotocamera: nome, espansione e numero della carta in un attimo. In modalità continua passi alla successiva senza fermarti.</p>
-      </article>
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
-        <h3>Prezzi veri</h3>
-        <p>Il prezzo di oggi su CardTrader e la media del listino europeo di Cardmarket, uno accanto all'altro.</p>
-        <span class="tag">EUR · aggiornati ogni giorno</span>
-      </article>
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-dasharray="3 2"/></svg></div>
-        <h3>Collezione</h3>
-        <p>Sfogliala per gioco ed espansione. Vedi cosa possiedi e cosa ti manca per completare il set.</p>
-      </article>
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
-        <h3>Mazzi</h3>
-        <p>Crea i tuoi mazzi, riempili scansionando o dal catalogo e scopri quante carte ti mancano.</p>
-      </article>
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 7 5-3 5 3-1.5-7"/></svg></div>
-        <h3>Pre-valutazione</h3>
-        <p>Fotografa fronte, retro e qualche scatto a luce radente per una stima della condizione prima di vendere o far gradare.</p>
-      </article>
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 2l20 20"/><path d="M8.5 16.4a5 5 0 0 1 7 0"/><path d="M5 12.9a10 10 0 0 1 5.2-2.8"/><path d="M19 12.9a10 10 0 0 0-2.3-1.7"/><path d="M12 20h.01"/></svg></div>
-        <h3>Anche senza rete</h3>
-        <p>Senza connessione puoi comunque sfogliare la collezione. Scansioni, prezzi e modifiche si aggiornano da soli appena torni online.</p>
-      </article>
     </div>
   </section>
 
