@@ -34,10 +34,12 @@
   --mint: #6EE7A8;
   --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --hdr: 68px;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
+html { scroll-padding-top: calc(var(--hdr) + 16px); }
 img { max-width: 100%; }
 body {
   background: var(--navy);
@@ -46,17 +48,32 @@ body {
   font-size: 16px;
   line-height: 1.6;
   padding-inline: 20px;
+  overflow-x: clip;
 }
 .wrap { max-width: 1040px; margin: 0 auto; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
 
-/* Header */
-.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+/* Header: stays on top while scrolling, full width, with the section links and the download button */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin-inline: -20px;
+  padding-inline: 20px;
+  background: rgba(16,18,44,0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.top-in { max-width: 1040px; margin: 0 auto; height: var(--hdr); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.3px; text-decoration: none; }
 .brand img { width: 40px; height: 40px; border-radius: 11px; }
+.nav { display: flex; align-items: center; gap: 26px; }
 .top-link { font-weight: 700; font-size: 14px; color: var(--muted); text-decoration: none; }
 .top-link:hover { color: var(--gold); }
+.btn.small { height: 40px; padding: 0 18px; border-radius: 999px; font-size: 14px; gap: 8px; }
+.btn.small svg { width: 17px; height: 17px; }
 
 /* Hero */
 .hero {
@@ -124,6 +141,21 @@ h1 em { font-style: normal; color: var(--gold); }
 
 /* Sections */
 section { padding-block: 56px; border-top: 1px solid var(--line); }
+/* Section label: a small pill above the title; the title's last words in gold */
+.label {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(242,210,75,0.3);
+  background: rgba(242,210,75,0.08);
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+h2 em { font-style: normal; color: var(--gold); }
 h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 8px; text-wrap: balance; }
 .sub { color: var(--muted); margin: 0 0 32px; max-width: 40em; }
 
@@ -208,6 +240,16 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 
 /* Games: the supported games' logos in one row that scrolls on its own, faded at the edges.
    The list is written twice so the loop has no seam: the track moves by exactly one copy. */
+.band {
+  margin-inline: calc(50% - 50vw);
+  padding-block: 30px;
+  border-top: 1px solid rgba(242,210,75,0.25);
+  border-bottom: 1px solid rgba(242,210,75,0.25);
+  background:
+    radial-gradient(50% 120% at 50% 50%, rgba(242,210,75,0.09), transparent 70%),
+    linear-gradient(90deg, var(--navy-deep), var(--surface) 50%, var(--navy-deep));
+}
+.band + section { border-top: 0; }
 .marquee {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
@@ -220,12 +262,24 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 .game img { display: block; height: 72px; width: auto; max-width: 200px; object-fit: contain; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* Features: one row per feature, the phone renders (transparent) alternating left and right */
-.feats { list-style: none; margin: 0 0 48px; padding: 0; display: grid; gap: 56px; }
+/* Features: one card per feature. While scrolling, each card sticks under the header and the
+   next one slides over it, so they pile up (a few px lower each, so the edges show). */
+.feats { list-style: none; margin: 0 0 48px; padding: 0; display: grid; gap: 28px; }
 .feat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.feats .feat {
+  padding: 36px 44px;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, #1c2048, var(--surface) 60%);
+  box-shadow: 0 -18px 40px -24px rgba(0,0,0,0.8);
+}
 .feat:nth-child(even) .feat-img { order: 2; }
-.feat-img { display: block; width: 100%; max-width: 440px; height: auto; margin-inline: auto; filter: drop-shadow(0 26px 40px rgba(0,0,0,0.5)); }
-.feat-img.single { max-width: 250px; }
+.feat-img { display: block; width: 100%; max-width: 400px; height: auto; margin-inline: auto; filter: drop-shadow(0 26px 40px rgba(0,0,0,0.5)); }
+.feat-img.single { max-width: 230px; }
+#prevalutazione .feat-img { max-width: 440px; }
+@media (min-height: 700px) {
+  .feats .feat { position: sticky; top: calc(var(--hdr) + 20px + var(--i, 0) * 14px); }
+}
 .feat h3 { font-size: clamp(22px, 2.6vw, 28px); letter-spacing: -0.5px; line-height: 1.2; margin: 8px 0 10px; text-wrap: balance; }
 .feat p { margin: 0; color: var(--muted); max-width: 30em; }
 .feat .eyebrow + h2 { margin-top: 8px; }
@@ -446,17 +500,14 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   .limits { grid-template-columns: minmax(0, 1fr); }
   .feats { gap: 16px; margin-bottom: 16px; }
   .feat { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  /* Stacked, each feature becomes a card so its photo and its text read as one block */
-  .feats .feat {
-    padding: 22px 18px 20px;
-    border-radius: 22px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-  }
-  .feats .feat-img { filter: drop-shadow(0 16px 24px rgba(0,0,0,0.45)); }
+  .feats .feat { padding: 22px 18px 20px; border-radius: 22px; }
+  .feats .feat-img { max-width: 270px; filter: drop-shadow(0 16px 24px rgba(0,0,0,0.45)); }
+  .feats .feat-img.single { max-width: 150px; }
   .feat:nth-child(even) .feat-img { order: 0; }
   .feat-img { max-width: 340px; }
-  .feat-img.single { max-width: 200px; }
+  :root { --hdr: 60px; }
+  .nav .top-link { display: none; }
+  .band { padding-block: 22px; }
   .shop { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .jig { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .stand-wrap { width: 308px; height: 288px; margin: 0 auto; }
@@ -477,11 +528,22 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 }
 </style>
 
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="#top" id="top"><img src="icon.png" alt="">OmniTCG</a>
-    <a class="top-link" href="#installa">Come si installa</a>
+<header class="top">
+    <div class="top-in">
+      <a class="brand" href="#top" id="top"><img src="icon.png" alt="">OmniTCG</a>
+      <nav class="nav" aria-label="Sezioni">
+        <a class="top-link" href="#funzioni">Funzioni</a>
+        <a class="top-link" href="#prevalutazione">Pre-valutazione</a>
+        <a class="top-link" href="#limiti">Limiti</a>
+        <a class="top-link" href="#installa">Installa</a>
+        <a class="btn small apk-link" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+          Scarica l'APK
+        </a>
+      </nav>
+    </div>
   </header>
+<div class="wrap">
 
   <div class="hero">
     <div>
@@ -501,7 +563,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         fetchpriority="high">
   </div>
 
-  <section>
+  <section class="band" aria-label="Giochi supportati">
     <div class="marquee">
       <div class="marquee-track">
         <ul class="games" aria-label="Giochi supportati">
@@ -526,11 +588,12 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     </div>
   </section>
 
-  <section>
-    <h2>Tutto quello che serve a un collezionista</h2>
+  <section id="funzioni">
+    <span class="label">Funzioni</span>
+    <h2>Tutto quello che serve a un <em>collezionista</em></h2>
     <p class="sub">Dalla carta appena uscita dalla bustina al valore dell'intera collezione.</p>
     <ul class="feats">
-      <li class="feat">
+      <li class="feat" style="--i: 0">
         <img class="feat-img" src="screens/coppia_scansione.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: una carta inquadrata e rilevata, e le corrispondenze trovate con i prezzi per condizione" loading="lazy">
         <div>
           <span class="eyebrow">Scansione</span>
@@ -538,7 +601,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
           <p>Punta la fotocamera: nome, espansione e numero della carta in un attimo, con il prezzo per ogni condizione. Se ci sono stampe simili, scegli quella giusta tra le corrispondenze.</p>
         </div>
       </li>
-      <li class="feat">
+      <li class="feat" style="--i: 1">
         <img class="feat-img single" src="screens/scansione_continua_singolo.webp" width="619" height="1143" alt="Telefono con OmniTCG in modalità continua: una carta rilevata e in basso le carte già scansionate con i prezzi e il totale" loading="lazy">
         <div>
           <span class="eyebrow">Scansione continua</span>
@@ -546,7 +609,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
           <p>In modalità continua passi subito alla carta successiva: quelle già scansionate si mettono in fila in basso, ognuna col suo prezzo, insieme al totale.</p>
         </div>
       </li>
-      <li class="feat">
+      <li class="feat" style="--i: 2">
         <img class="feat-img" src="screens/coppia_collezione.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: la Home con il valore della collezione e un'espansione con le carte possedute e i loro prezzi" loading="lazy">
         <div>
           <span class="eyebrow">Collezione</span>
@@ -554,7 +617,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
           <p>Il valore di tutto quello che hai su CardTrader e su Cardmarket, insieme a carte, copie, espansioni e mazzi. Sfoglia la collezione per gioco ed espansione.</p>
         </div>
       </li>
-      <li class="feat">
+      <li class="feat" style="--i: 3">
         <img class="feat-img" src="screens/coppia_espansioni.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: due espansioni, una con tutte le carte e una con le carte possedute e i loro prezzi" loading="lazy">
         <div>
           <span class="eyebrow">Prezzi ed espansioni</span>
@@ -563,7 +626,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <span class="tag">EUR · aggiornati ogni giorno</span>
         </div>
       </li>
-      <li class="feat">
+      <li class="feat" style="--i: 4">
         <img class="feat-img" src="screens/coppia_mazzi.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: l'elenco dei mazzi e il dettaglio di un mazzo con le sue carte" loading="lazy">
         <div>
           <span class="eyebrow">Mazzi</span>
@@ -578,8 +641,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     <div class="feat">
       <img class="feat-img" src="screens/coppia_prevalutazione.webp" width="1070" height="1175" alt="Due telefoni con OmniTCG: le foto di fronte, retro e a luce radente di una carta, e la stima PSA con centratura, angoli, bordi, superficie e difetti" loading="lazy">
       <div>
-        <span class="eyebrow">Pre-valutazione</span>
-        <h2>In che condizione è la tua carta?</h2>
+        <span class="label">Pre-valutazione</span>
+        <h2>In che condizione è <em>la tua carta?</em></h2>
         <p class="sub" style="margin-bottom: 0">Prima di vendere o far gradare una carta, fatti un'idea del voto che potrebbe prendere. Bastano qualche foto e un tocco su "Valuta la carta": la stima la fa l'intelligenza artificiale, partendo dalle tue foto.</p>
         <ul class="jig-points">
           <li>
@@ -621,7 +684,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
             loading="lazy" style="width:100%;height:auto;display:block">
       </div>
       <div>
-        <h2>Modalità supporto: scansioni a mani libere</h2>
+        <span class="label">Mani libere</span>
+        <h2>Modalità supporto: <em>scansioni a mani libere</em></h2>
         <p class="sub" style="margin-bottom: 0">Per chi ha tante carte da registrare. Appoggi il telefono sul braccio del supporto, schermo in su, e lasci cadere le carte nella vaschetta sotto, una alla volta: ognuna viene scansionata da sola, senza toccare il telefono.</p>
         <ul class="jig-points">
           <li>
@@ -649,7 +713,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 
 
   <section id="limiti">
-    <h2>I limiti dell'account</h2>
+    <span class="label">Account</span>
+    <h2>I limiti <em>dell'account</em></h2>
     <p class="sub">Un account nuovo parte così. I contatori giornalieri si azzerano a mezzanotte UTC, cioè alle 2:00 in Italia (alle 1:00 con l'ora solare).</p>
     <ul class="limits">
       <li class="limit">
@@ -718,7 +783,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   
 
   <section id="negozi">
-    <h2>Vendi su CardTrader</h2>
+    <span class="label">Negozi</span>
+    <h2>Vendi su <em>CardTrader</em></h2>
     <p class="sub">Un account negozio collega il tuo account CardTrader e mette in vendita le carte del tuo inventario senza ricaricarle a mano una per una. Ti verrà fornita una web app dedicata.</p>
     <div class="shop">
       <div>
@@ -784,7 +850,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   </section>
 
   <section id="installa">
-    <h2>Come si installa</h2>
+    <span class="label">Installazione</span>
+    <h2>Come si <em>installa</em></h2>
     <p class="sub">L'app non è sul Play Store: si installa direttamente dall'APK. Ci vuole un minuto.</p>
     <ol class="steps">
       <li>
@@ -811,7 +878,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   </section>
 
   <section id="segnalazioni">
-    <h2>Segnalazioni e suggerimenti</h2>
+    <span class="label">Contatti</span>
+    <h2>Segnalazioni e <em>suggerimenti</em></h2>
     <p class="sub">Una carta riconosciuta male, un prezzo strano, un'idea per una funzione: scrivimi dove preferisci.</p>
     <div class="contacts">
       <article class="contact">
@@ -858,7 +926,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   <section id="dona" hidden>
     <div class="donate">
       <div>
-        <h2>Ti piace OmniTCG?</h2>
+        <span class="label">Supporta il progetto</span>
+        <h2>Ti piace <em>OmniTCG?</em></h2>
         <p>L'app è un progetto personale. Se ti è utile, una piccola donazione aiuta a tenere acceso il server e a pagare i servizi che riconoscono e valutano le carte.</p>
         <ul class="costs" aria-label="Cosa copre una donazione">
           <li>server</li>
