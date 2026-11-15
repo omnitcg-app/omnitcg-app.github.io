@@ -464,6 +464,7 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 }
 .steps h3 { margin: 0 0 4px; font-size: 17px; }
 .steps p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.steps .pill-btn { margin-top: 14px; }
 .copy {
   display: flex;
   flex-wrap: wrap;
@@ -536,9 +537,9 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <a class="top-link" href="#prevalutazione">Pre-valutazione</a>
         <a class="top-link" href="#limiti">Limiti</a>
         <a class="top-link" href="#installa">Installa</a>
-        <a class="btn small apk-link" href="#" target="_blank" rel="noopener">
+        <a class="btn small" href="#installa">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
-          Scarica l'APK
+          Scarica l'app
         </a>
       </nav>
     </div>
@@ -550,11 +551,11 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
       <h1>Inquadra la carta. <em>Scopri quanto vale.</em></h1>
       <p class="lead">OmniTCG riconosce le tue carte con la fotocamera, ti mostra i prezzi di CardTrader e Cardmarket e tiene in ordine la collezione di tutti i tuoi giochi, in un posto solo.</p>
       <div class="cta">
-        <a class="btn apk-link" href="#" target="_blank" rel="noopener">
+        <a class="btn" href="#installa">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
-          Scarica l'APK
+          Scarica l'app
         </a>
-        <span class="meta">Solo Android</span>
+        <span class="meta">Android · test chiuso sul Play Store</span>
       </div>
     </div>
 
@@ -692,7 +693,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
             <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg></span>
             <div>
               <h3>Hai una stampante 3D?</h3>
-              <p>Puoi stampare un qualunque supporto che abbia un braccio porta telefono e una vaschetta per le carte.</p>
+              <p>Puoi stampare un qualunque supporto che abbia un braccio porta telefono e una vaschetta per le carte (consiglio <a href="https://makerworld.com/en/models/739233-card-slinger-3-0-for-easily-scanning-mtg-cards#profileId-1526004">questo modello</a>).</p>
             </div>
           </li>
           <li>
@@ -852,28 +853,23 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   <section id="installa">
     <span class="label">Installazione</span>
     <h2>Come si <em>installa</em></h2>
-    <p class="sub">L'app non è sul Play Store: si installa direttamente dall'APK. Ci vuole un minuto.</p>
+    <p class="sub">L'app è in test chiuso sul Play Store: prima entri nel gruppo dei tester, poi la scarichi come una qualsiasi app. Ci vuole un minuto.</p>
     <ol class="steps">
       <li>
-        <h3>Scarica l'APK</h3>
-        <p>Apri questa pagina dal telefono Android e tocca "Scarica l'APK".</p>
+        <h3>Entra nel gruppo tester</h3>
+        <p>Accedi con l'account Google che usi sul telefono e tocca "Partecipa al gruppo". Senza questo passaggio il Play Store non mostra l'app.</p>
+        <a class="pill-btn" href="https://groups.google.com/g/tester-omnitcg" target="_blank" rel="noopener">Apri il gruppo</a>
       </li>
       <li>
-        <h3>Consenti l'installazione</h3>
-        <p>Apri il file scaricato. Android chiede di consentire le app da questa origine: attiva l'opzione per il browser che hai usato e torna indietro.</p>
+        <h3>Scarica dal Play Store</h3>
+        <p>Dal telefono Android apri la pagina di OmniTCG sul Play Store e tocca "Installa". Se l'app non compare, aspetta qualche minuto dopo l'iscrizione al gruppo.</p>
+        <a class="pill-btn" href="https://play.google.com/store/apps/details?id=com.omnitcg.app" target="_blank" rel="noopener">Apri il Play Store</a>
       </li>
       <li>
         <h3>Crea l'account</h3>
         <p>Apri OmniTCG, tocca "Registrati", scegli i tuoi giochi e segui il tutorial.</p>
       </li>
     </ol>
-      <div class="cta">
-        <a class="btn apk-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
-          Scarica l'APK
-        </a>
-        <span class="meta">Solo Android</span>
-      </div>
     <p class="note">Per ora c'è solo la versione Android. Prima di registrarti dai un'occhiata ai <a href="#limiti">limiti dell'account</a>.</p>
   </section>
 
@@ -949,9 +945,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 </div>
 
 <script>
-  // The APK in the public GCS bucket. The file name carries the version: change it here on every release.
-  const APK_URL = 'https://storage.googleapis.com/omnitcg-apk/omniTCG.apk';
-  document.querySelectorAll('.apk-link').forEach((a) => { a.href = APK_URL; });
   // Contacts. The address is put together here rather than written in the page,
   // so the simplest address-harvesting bots don't find it.
   const MAIL = ['giacomocorro', 'gmail.com'].join('@');
