@@ -167,7 +167,9 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
    .t a horizontal face (front edge x,y; width w; depth d), .s a right-hand face
    (front edge x, from y down h; depth d), .f a plain front face. */
 .jig { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 48px; align-items: center; }
-.stand-wrap { width: 336px; height: auto; max-width: 100%; }
+.stand-wrap { width: 380px; max-width: 100%; margin: 0; }
+.stand-wrap img { display: block; width: 100%; height: auto; filter: drop-shadow(0 26px 40px rgba(0,0,0,0.5)); }
+.stand-wrap figcaption { margin-top: 10px; font-size: 12px; color: var(--faint); text-align: center; }
 .stand { position: relative; width: 280px; height: 262px; transform: scale(1.2); transform-origin: top left; }
 .stand div { position: absolute; }
 .stand .t {
@@ -578,7 +580,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   .band { padding-block: 22px; }
   .shop { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .jig { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-  .stand-wrap { width: 308px; height: 288px; margin: 0 auto; }
+  .stand-wrap { width: 100%; max-width: 280px; margin: 0 auto; }
   .stand { transform: scale(1.1); }
   .limit { grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 16px; }
   .limit .num { font-size: 32px; }
@@ -789,11 +791,11 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 
   <section id="supporto">
     <div class="jig">
-      <div class="stand-wrap">
-        <img src="supporto_scanner.png" width="336" height="569"
-            alt="Supporto stampato in 3D: telefono sul braccio, carte nella vaschetta sotto"
-            loading="lazy" style="width:100%;height:auto;display:block">
-      </div>
+      <figure class="stand-wrap">
+        <img src="screens/supporto_scanner.webp" width="585" height="740"
+            alt="Supporto stampato in 3D: il telefono sul braccio, con OmniTCG aperto nello scanner, inquadra la carta nella vaschetta sotto"
+            loading="lazy">
+      </figure>
       <div>
         <span class="label">Mani libere</span>
         <h2>Modalità supporto: <em>scansioni a mani libere</em></h2>
@@ -803,7 +805,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
             <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg></span>
             <div>
               <h3>Hai una stampante 3D?</h3>
-              <p>Puoi stampare un qualunque supporto che abbia un braccio porta telefono e una vaschetta per le carte (consiglio <a href="https://makerworld.com/en/models/739233-card-slinger-3-0-for-easily-scanning-mtg-cards#profileId-1526004">questo modello</a>).</p>
+              <p>Puoi stampare un qualunque supporto che abbia un braccio porta telefono e una vaschetta per le carte (consiglio <a href="https://makerworld.com/en/models/739233-card-slinger-3-0-for-easily-scanning-mtg-cards#profileId-1526004" target="_blank" rel="noopener">Card Slinger</a>, quello nella foto).</p>
             </div>
           </li>
           <li>
@@ -811,6 +813,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
             <div>
               <h3>Non ce l'hai?</h3>
               <p>Puoi richiedere il supporto contattandomi o acquistarne uno online.</p>
+              <figcaption>Modello: <a href="https://makerworld.com/en/models/739233-card-slinger-3-0-for-easily-scanning-mtg-cards#profileId-1526004" target="_blank" rel="noopener">Card Slinger</a>.</figcaption>
             </div>
           </li>
         </ul>
